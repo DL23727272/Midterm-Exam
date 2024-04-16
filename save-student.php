@@ -12,6 +12,7 @@ if (isset($_POST['studentID'], $_POST['lastname'], $_POST['firstname'], $_POST['
     $gender = mysqli_real_escape_string($con, $_POST['gender']);
     $civilstatus = mysqli_real_escape_string($con, $_POST['civilstatus']);
 
+   
     if ($studentID > 0) {
         $query = "UPDATE students SET lastname='$lastname', firstname='$firstname', middlename='$middlename', course='$course', gender='$gender', civilstatus='$civilstatus' 
                   WHERE id='$studentID'";
@@ -19,6 +20,8 @@ if (isset($_POST['studentID'], $_POST['lastname'], $_POST['firstname'], $_POST['
         $query = "INSERT INTO students (lastname, firstname, middlename, course, gender, civilstatus) 
                   VALUES ('$lastname', '$firstname', '$middlename', '$course', '$gender', '$civilstatus')";
     }
+
+    
 
     if (mysqli_query($con, $query)) {
         echo "Operation successful";
