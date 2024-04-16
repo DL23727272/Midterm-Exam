@@ -232,6 +232,22 @@
 			}
 			});
 		});
+		 // Add student form submission
+		 $(document).on("submit", "#update-form", function(event) {
+			event.preventDefault();
+			var formData = $(this).serialize();
+			$.ajax({
+			url: "save-student.php", 
+			method: "POST",
+			data: formData,
+			success: function(response) {
+				$("#listhere").html(response);
+				alert("Update Saved");
+				$("#update-form")[0].reset();
+				$("#edit_data_Modal").modal("hide");
+			}
+			});
+		});
 
 	  
 		// Edit student form submission
