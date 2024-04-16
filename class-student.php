@@ -22,17 +22,25 @@ class Student
                 echo "<td>" . $row['civilstatus'] . "</td>";
                 echo "<td>" . $row['gender'] . "</td>";
                 echo "<td>" . $row['course'] . "</td>";
+
                 echo '<td>';
                 echo ' <button type="submit" name="load_insload" 
 							class="btn btn-info edit_data" id="' . $row['id'] . '"  data-toggle="modal" data-target="#edit_data_Modal">
-							Edit ' . $row['id'] . '
+							Edit
 						</button>';
                 echo '</td>';
+
                 echo '<td>';
                 echo '  <button type="submit" name="load_insload"
 							class="btn btn-info view_data" id="' . $row['id'] . '"  data-toggle="modal" data-target="#view_data_Modal">
-							View' . $row['id'] . '
+							View
 						</button>';
+                echo '</td>';
+
+                echo '<td>';
+                echo '  <button type="submit" name="load_insload" class="btn btn-danger delete_data " data-studentid="' . $row['id'] . '">
+							Delete
+					 </button>';
                 echo '</td>';
                 echo '</tr>';
             }

@@ -270,7 +270,41 @@
 			});
 		});
 
-	  
+		//delete student
+		$(document).on('click', '.delete_data', function() {
+			var studentID = $(this).data('studentid');
+
+			Swal.fire({
+				title: "Are you sure you want to delete this student?",
+				showCancelButton: true,
+				confirmButtonText: "Delete",
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						url: "delete-student.php",
+						method: "POST",
+						data: { studentID: studentID },
+						success: function(response) {
+							Swal.fire({
+								icon: 'success',
+								title: 'Deleted Student Info',
+								showConfirmButton: false,
+								timer: 3000 
+							});
+							setTimeout(function () {
+								location.reload();
+							}, 2000);
+						},
+						error: function(xhr, status, error) {
+							alert("An error occurred while deleting the student.");
+							console.error(xhr.responseText);
+						}
+					});
+				}
+			});
+			
+		});
+		
 		// Edit student form submission
 		$(document).on('click', '.edit_data', function() {
 			var studentID = $(this).attr('id'); 
