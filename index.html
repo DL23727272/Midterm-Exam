@@ -14,6 +14,9 @@
     <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script> 
 
+	<!-- Sweet -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <style type="text/css">
     	input[type=text], select option, select  {
     		width: 100%;
@@ -227,7 +230,15 @@
 			data: formData,
 			success: function(response) {
 				$("#listhere").html(response);
-				alert("New Student Saved");
+				Swal.fire({
+					icon: 'success',
+					title: 'New Student Saved.',
+					showConfirmButton: false,
+					timer: 3000 
+				  });
+				  setTimeout(function () {
+					location.reload();
+			      }, 2000);
 				$("#reg-form")[0].reset();
 				$("#reg").modal("hide");
 			}
@@ -244,7 +255,15 @@
 			data: formData,
 			success: function(response) {
 				$("#listhere").html(response);
-				alert("Update Saved");
+				Swal.fire({
+					icon: 'success',
+					title: 'Updated Student Info',
+					showConfirmButton: false,
+					timer: 3000 
+				  });
+				  setTimeout(function () {
+					location.reload();
+			      }, 2000);
 				$("#update-form")[0].reset();
 				$("#edit_data_Modal").modal("hide");
 			}
