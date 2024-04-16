@@ -85,7 +85,7 @@
 		});
 	  
 		// Add student form submission
-		$(document).on("#reg-form", function(event) {
+		$(document).on("submit", "#reg-form", function(event) {
 		  event.preventDefault();
 		  var formData = $(this).serialize();
 		  $.ajax({
@@ -100,7 +100,6 @@
 			}
 		  });
 		});
-		
 	  
 		// Edit student form submission
 		$(document).on('click', '.edit_data', function() {
