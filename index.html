@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Student List</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<!--datatabel scripts-->
+    
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script> 
+
+    <style type="text/css">
+    	input[type=text], select option, select  {
+    		width: 100%;
+		  padding: 12px 20px;
+		  display: inline-block;
+		  border: 1px solid #ccc;
+		  border-radius: 4px;
+		  box-sizing: border-box;
+		  font-weight: bold;
+    	}
+    </style>
+
+
+</head>
+<body>
+	<header class="container p-3 alert-success">
+		<h3>SUBJECT</h3>
+		<p>COURSE YEAR & SECTION</b></p>
+	</header>
+	<section class="container mt-4">
+		<h4>List of Students</h4>
+		<button type='button' class='btn btn-primary m-2' data-toggle='modal' data-target='#reg'>Add Student</button>
+
+		
+			<div class="container-fluid">
+							
+				<table id ="myTable"class="display" style="width:100%">
+				    <thead>
+				        <tr>
+				            <th>IDNo</th>
+				            <th>LastName</th>
+				            <th>FirstName</th>
+				            <th>MiddleName</th>
+				            <th>Civil Status</th>
+				            <th>Gender</th>
+				            <th>Course</th>
+				            <th>Action</th>
+				        </tr>
+				    </thead>
+				    <tbody id="listhere" >
+
+				    </tbody>
+				</table>
+
+		</div>
+
+		<div id="modalDLContainer"></div>
+
+	</section>
+
+
+	<script>
+		$(document).ready(function() {
+		  $('#myTable').DataTable();
+			$('#modalDLContainer').load('modals.html');
+
+		});
+		
+	  
+		// Load student list
+		$(document).ready(function() {
+		  $.ajax({
+			type: "GET",
+			url: "class-student.php", 
+			success: function(data) {
+			  $("#listhere").html(data);
+			}
+		  });
+		});
+	  
+		// Add student form submission
+		$(document).on("#reg-form", function(event) {
+		  event.preventDefault();
+		  var formData = $(this).serialize();
+		  $.ajax({
+			url: "save-student.php", 
+			method: "POST",
+			data: formData,
+			success: function(response) {
+			  $("#listhere").html(response);
+			  alert("New Student Saved");
+			  $("#reg-form")[0].reset();
+			  $("#reg").modal("hide");
+			}
+		  });
+		});
+		
+	  
+		// Edit student form submission
+		$(document).on('click', '.edit_data', function() {
+			var studentID = $(this).attr('id'); // Get the student ID from the clicked button
+			console.log(studentID);
+			$.ajax({
+				url: "view-student.php", 
+				method: "POST",
+				data: {
+					studentID: studentID,
+					saveID: 1 
+				},
+				dataType: "json",
+				success: function(data) {
+					console.log(data);
+					$('#edit-studentID').val(data.id);
+					$('#edit-lastname').val(data.lastname);
+					$('#edit-firstname').val(data.firstname);
+					$('#edit-middlename').val(data.middlename);
+					$('#edit-course').val(data.course);
+					$('#edit-gender').val(data.gender);
+					$('#edit-civilstatus').val(data.civilstatus);
+					$('#edit_data_Modal').modal('show'); 
+				}
+			});
+		});
+
+	  //View student modal
+		$(document).on('click', '.view_data', function() {
+			var studentID = $(this).attr('id');
+			console.log("Clicked student ID:", studentID); 
+		
+			$.ajax({
+				url: "view-student.php",
+				method: "POST",
+				data: {
+					studentID: studentID,
+					saveID: 1
+				},
+				dataType: "json",
+				success: function(data) {
+					console.log("Response data:", data); 
+					$('#view-studentID').val(data.id);
+					$('#view-lastname').val(data.lastname);
+					$('#view-firstname').val(data.firstname);
+					$('#view-middlename').val(data.middlename);
+					$('#view-course').val(data.course);
+					$('#view-gender').val(data.gender);
+					$('#view-civilstatus').val(data.civilstatus);
+					$('#view_data_Modal').modal('show');
+				}
+			});
+		});
+		
+
+		
+	  </script>
+	  </body>
+	  </html>
