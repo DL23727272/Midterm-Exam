@@ -61,53 +61,53 @@
 		</div>
 
 		<!-- Modal Form for Add Student--> 
-<div class="modal fade" id="reg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Register</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body" >
-            <p class="text-danger">* Required Field</p>
-           <form id="reg-form" class="form-group" enctype="multipart/form-data">
-              <input type="hidden" name="studentID" value="0">
-              <input type="hidden" name="saveID" value="0"> 
-               <label for="lastname">Lastname<span class="text-danger">*</span></label>
-               <input type="text" class="form-control" name="lastname" placeholder="Enter Lastname" required>
-               <label for="firstname">Firstname<span class="text-danger">*</span></label>
-               <input type="text" class="form-control" name="firstname" placeholder="Enter Firstname" required>
-               <label for="middlename">Middlename<span class="text-danger">*</span></label>
-               <input type="text" class="form-control" name="middlename" placeholder="Enter Middlename" required>
-               <label for="course">Course</label>
-               <input type="text" class="form-control" name="course" placeholder="Enter Course">
-               <label for="gender">Gender</label>
-               <select class="form-control" name="gender">
-                <option value="">Enter Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
-               <label for="civilstatus">Civil Status</label>
-               <select class="form-control" name="civilstatus">
-                <option value="">Enter Civil Status</option>
-                <option value="Single">Single</option>
-                <option value="Married">Married</option>
-              </select>
-               <input type="hidden" name="saveID" value="0">
-           
-        </div>
-        <div class="modal-footer">
-                <input type="submit" class="btn btn-info" id="savestud" name="savestud">
-            </form>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
+		<div class="modal fade" id="reg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Register</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" >
+				<p class="text-danger">* Required Field</p>
+				<form id="reg-form" class="form-group" enctype="multipart/form-data">
+					<input type="hidden" name="studentID" value="0">
+					<input type="hidden" name="saveID" value="0"> 
+					<label for="lastname">Lastname<span class="text-danger">*</span></label>
+					<input type="text" class="form-control" name="lastname" placeholder="Enter Lastname" required>
+					<label for="firstname">Firstname<span class="text-danger">*</span></label>
+					<input type="text" class="form-control" name="firstname" placeholder="Enter Firstname" required>
+					<label for="middlename">Middlename<span class="text-danger">*</span></label>
+					<input type="text" class="form-control" name="middlename" placeholder="Enter Middlename" required>
+					<label for="course">Course</label>
+					<input type="text" class="form-control" name="course" placeholder="Enter Course">
+					<label for="gender">Gender</label>
+					<select class="form-control" name="gender">
+					<option value="">Enter Gender</option>
+					<option value="Male">Male</option>
+					<option value="Female">Female</option>
+					</select>
+					<label for="civilstatus">Civil Status</label>
+					<select class="form-control" name="civilstatus">
+					<option value="">Enter Civil Status</option>
+					<option value="Single">Single</option>
+					<option value="Married">Married</option>
+					</select>
+					<input type="hidden" name="saveID" value="0">
+				
+			</div>
+			<div class="modal-footer">
+					<input type="submit" class="btn btn-info" id="savestud" name="savestud">
+				</form>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+			</div>
+		</div>
+		</div>
 
-<!-- Modal Form for Edit Student--> 
+		<!-- Modal Form for Edit Student--> 
 		<div class="modal fade" id="edit_data_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-lg">
 		    <div class="modal-content">
@@ -156,7 +156,7 @@
 		  </div>
 		</div>
 
-<!-- View modal -->
+		<!-- View modal -->
 		<div class="modal fade" id="view_data_Modal" tabindex="-2" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-lg">
 		    <div class="modal-content">
@@ -196,6 +196,7 @@
 		    </div>
 		  </div>
 		</div>
+
 	</section>
 
 
@@ -232,7 +233,8 @@
 			}
 			});
 		});
-		 // Add student form submission
+
+		 // Update student form submission
 		 $(document).on("submit", "#update-form", function(event) {
 			event.preventDefault();
 			var formData = $(this).serialize();
@@ -252,7 +254,7 @@
 	  
 		// Edit student form submission
 		$(document).on('click', '.edit_data', function() {
-			var studentID = $(this).attr('id'); // Get the student ID from the clicked button
+			var studentID = $(this).attr('id'); 
 			console.log(studentID);
 			$.ajax({
 				url: "view-student.php", 
@@ -276,7 +278,7 @@
 			});
 		});
 
-	  //View student modal
+	   //View student modal
 		$(document).on('click', '.view_data', function() {
 			var studentID = $(this).attr('id');
 			console.log("Clicked student ID:", studentID); 
